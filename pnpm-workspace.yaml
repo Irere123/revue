@@ -1,3 +1,4 @@
 packages:
-  - 'api'
-  - 'web'
+  - "api"
+  - "web"
+  - "clients/*"

@@ -13,3 +13,4 @@ The "why" behind this project is to bridge the gap between developers who need e
 - Postgresql
 - GraphQL (for API layer)
 - OAuth (for authentication)
+- WebSockets (for real-time collaboration)
