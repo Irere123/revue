@@ -4,11 +4,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  BaseEntity,
 } from "typeorm";
 
 @ObjectType()
 @Entity({ name: "users" })
-export class User {
+export class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id!: number;
@@ -29,7 +30,7 @@ export class User {
   avatarUrl: string;
 
   @Column({ type: "text", unique: true })
-  githubId: number;
+  githubId: string;
 
   @Field(() => String, { nullable: true })
   @Column({ type: "text" })
