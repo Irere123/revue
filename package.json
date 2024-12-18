@@ -10,7 +10,7 @@
     "concurrently": "^9.1.0"
   },
   "scripts": {
-    "dev": "concurrently \"pnpm --filter @revue/api run dev\" \"pnpm --filter @revue/web run dev\""
+    "dev": "pnpm -r --parallel run dev"
   },
   "keywords": [],
   "author": "",
