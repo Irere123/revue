@@ -2,7 +2,7 @@ import { API_URL } from "@/lib/constants";
 import type { TypedDocumentString } from "./graphql";
 
 export async function execute<TResult, TVariables>(
-  _query: TypedDocumentString<TResult, TVariables>,
+  query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ) {
   const response = await fetch(`${API_URL}/graphql`, {
@@ -12,7 +12,7 @@ export async function execute<TResult, TVariables>(
       Accept: "application/graphql-response+json",
     },
     body: JSON.stringify({
-      query: document,
+      query,
       variables,
     }),
   });

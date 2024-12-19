@@ -1,5 +1,6 @@
 import { ReviewPost } from "@/components/review-post";
 import { Button } from "@/components/ui/button";
+import withAuth from "@/lib/withAuth";
 
 const reviewsPosts = [
   {
@@ -34,7 +35,7 @@ const reviewsPosts = [
   },
 ];
 
-export default function DashboardPage() {
+function Dashboard() {
   return (
     <div className="flex flex-col sm:px-0 px-4">
       <div>
@@ -54,3 +55,7 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+const DashboardPage = withAuth(Dashboard);
+
+export default DashboardPage;

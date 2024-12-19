@@ -11,7 +11,7 @@ import { buildSchema } from "type-graphql";
 import { middlewares } from "./middlewares";
 import { init as initPassport } from "./authentication";
 import { RecipeResolver } from "./graphql";
-import { COOKIE_NAME, IS_PROD } from "./lib/constants";
+import { COOKIE_NAME, IS_PROD, WEB_URL } from "./lib/constants";
 import { authRouter } from "./routes/auth";
 import { AppDataSource } from "./data-source";
 
@@ -32,9 +32,10 @@ async function main() {
 
   const app = express();
 
-  if (IS_PROD) {
-    app.set("trust proxy", 1); // trust first proxy
-  }
+  // Middlewares
+  app.use(cors({ origin: WEB_URL, credentials: true }));
+  app.use(middlewares);
+  app.set("trust proxy", 1); // trust first proxy
 
   app.use((req, _, next) => {
     const authorization = req.headers.authorization;
@@ -63,7 +64,6 @@ async function main() {
 
   app.use(
     "/graphql",
-    cors<cors.CorsRequest>(),
     express.json(),
     expressMiddleware(server, {
       context: async ({ req, res }) => {
@@ -72,7 +72,6 @@ async function main() {
     }) as any
   );
 
-  app.use(middlewares);
   app.use("/auth", authRouter);
   app.get("/", (_req, res) => {
     res.send("Hello world");

@@ -9,9 +9,10 @@ import {
 } from "@/components/ui/card";
 import { API_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import withAuth from "@/lib/withAuth";
 import { Link } from "react-router";
 
-export default function HomePage() {
+function HomePage() {
   return (
     <div>
       <Card className={cn("w-[380px]")}>
@@ -32,3 +33,6 @@ export default function HomePage() {
     </div>
   );
 }
+
+const AuthenticatedHomePage = withAuth(HomePage, { requireAuth: false });
+export default AuthenticatedHomePage;
