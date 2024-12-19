@@ -1,3 +1,4 @@
+import { Github } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,8 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { API_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { Github } from "lucide-react";
+import { Link } from "react-router";
 
 export default function HomePage() {
   return (
@@ -20,9 +22,11 @@ export default function HomePage() {
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <Button className="w-full">
-            <Github /> Continue with Github
-          </Button>
+          <Link to={`${API_URL}/auth/github`}>
+            <Button className="w-full">
+              <Github /> Continue with Github
+            </Button>
+          </Link>
         </CardFooter>
       </Card>
     </div>

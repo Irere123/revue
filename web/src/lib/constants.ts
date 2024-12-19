@@ -1,3 +1,8 @@
+export const IS_PROD = process.env.NODE_ENV === "production";
+export const API_URL = IS_PROD
+  ? "https://revue-ttwt.onrender.com"
+  : "http://localhost:4000";
+
 export const LANGUAGES = [
   { id: "javascript", name: "JavaScript", type: "Web", popularity: 1 },
   { id: "python", name: "Python", type: "General Purpose", popularity: 2 },
