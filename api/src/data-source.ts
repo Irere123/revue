@@ -11,5 +11,5 @@ export const AppDataSource = new DataSource({
     "potsgres://postgres:postgres@localhost:5432/revue",
   entities: [User],
   logging: !IS_PROD,
-  migrations: ["src/migration/*.ts"],
+  migrations: ["build/migration/*.js"],
 });
