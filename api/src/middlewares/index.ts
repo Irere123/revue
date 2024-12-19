@@ -3,16 +3,12 @@ import passport from "passport";
 import cors from "cors";
 import session from "express-session";
 import { RedisStore } from "connect-redis";
-import { createClient } from "redis";
-
 import { Router, Request, json } from "express";
+
 import { IS_PROD, WEB_URL } from "../lib/constants";
+import { redisClient } from "../redis";
 
 const middlewares = Router();
-
-// Initialize client.
-let redisClient = createClient();
-redisClient.connect().catch(console.error);
 
 // Initialize store.
 let redisStore = new RedisStore({
