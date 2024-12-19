@@ -33,5 +33,7 @@ COPY --from=build /usr/src/app/package.json .
 # Expose the port the app runs on
 EXPOSE 4000
 
+ENV NODE_ENV=production
+
 # Define the command to run the app
 CMD ["node", "build/index.js"]
