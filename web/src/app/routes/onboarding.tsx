@@ -18,7 +18,7 @@ export default function OnBoardingPage() {
     <div>
       <Card className={cn("w-[380px]")}>
         <CardHeader>
-          <CardTitle>Customize your account</CardTitle>
+          <CardTitle className="text-xl">Customize your account</CardTitle>
           <CardDescription>
             Make your profile your own and start working!
           </CardDescription>
