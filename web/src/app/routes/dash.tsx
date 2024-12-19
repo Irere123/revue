@@ -1,8 +1,55 @@
+import { ReviewPost } from "@/components/review-post";
+import { Button } from "@/components/ui/button";
+
+const reviewsPosts = [
+  {
+    id: 1,
+    repo: {
+      name: "react",
+      owner: "facebook",
+      description:
+        "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
+    },
+    tags: ["javascript", "frontend"],
+    user: {
+      id: 1,
+      username: "jane",
+      avatarUrl: "https://avatars.githubusercontent.com/u/1",
+    },
+  },
+  {
+    id: 2,
+    repo: {
+      name: "elixir",
+      owner: "facebook",
+      description:
+        "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
+    },
+    tags: ["javascript", "frontend"],
+    user: {
+      id: 1,
+      username: "jane",
+      avatarUrl: "https://avatars.githubusercontent.com/u/2",
+    },
+  },
+];
+
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <div className="w-full bg-green-100">
-        <p>Hello</p>
+    <div className="flex flex-col sm:px-0 px-4">
+      <div>
+        <Button>Request</Button>
+      </div>
+      <div className="mt-4 flex flex-col gap-4">
+        {reviewsPosts.map((post) => (
+          <ReviewPost
+            key={post.id}
+            repo={post.repo}
+            id={post.id}
+            user={post.user}
+            tags={post.tags}
+          />
+        ))}
       </div>
     </div>
   );
