@@ -8,7 +8,7 @@ import { Router, Request, json } from "express";
 import { COOKIE_NAME, IS_PROD, WEB_URL } from "../lib/constants";
 import { redisClient } from "../redis";
 
-const middlewares = Router();
+export const middlewares = Router();
 
 // Initialize store.
 let redisStore = new RedisStore({
@@ -74,5 +74,3 @@ middlewares.use((req: Request, _res, next) => {
   }
   next();
 });
-
-export default middlewares;

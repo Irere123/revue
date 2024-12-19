@@ -8,12 +8,12 @@ import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { buildSchema } from "type-graphql";
 
+import { middlewares } from "./middlewares";
 import { init as initPassport } from "./authentication";
 import { RecipeResolver } from "./graphql";
 import { COOKIE_NAME, IS_PROD } from "./lib/constants";
 import { authRouter } from "./routes/auth";
 import { AppDataSource } from "./data-source";
-import { GQLContext } from "./types/context";
 
 const PORT = process.env.PORT || 4000;
 
@@ -72,6 +72,7 @@ async function main() {
     }) as any
   );
 
+  app.use(middlewares);
   app.use("/auth", authRouter);
   app.get("/", (_req, res) => {
     res.send("Hello world");
