@@ -20,6 +20,7 @@ async function main() {
   AppDataSource.initialize()
     .then(() => {
       console.log("Data Source has been initialized!");
+      AppDataSource.runMigrations({ transaction: "all" });
     })
     .catch((err) => {
       console.error("Error during Data Source initialization", err);

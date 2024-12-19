@@ -40,6 +40,11 @@
   "scripts": {
     "dev": "concurrently \"tsc -w\"  \"node --watch build/index.js\"",
     "build": "tsc",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "typeorm:create": "pnpm typeorm migration:create",
+    "typeorm:generate": "pnpm typeorm migration:generate -d src/data-source.ts",
+    "typeorm:migrate": "pnpm typeorm migration:run -d src/data-source.ts",
+    "typeorm:revert": "pnpm typeorm migration:revert -d src/data-source.ts",
+    "typeorm:drop": "pnpm typeorm schema:drop -d src/data-source.ts"
   }
 }
