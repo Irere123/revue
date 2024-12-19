@@ -11,7 +11,7 @@ RUN npm install -g pnpm
 COPY package.json ./
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # Copy the rest of the application code
 COPY . .
