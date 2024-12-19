@@ -10,6 +10,7 @@ export const AppDataSource = new DataSource({
     process.env.DATABASE_URL ||
     "potsgres://postgres:postgres@localhost:5432/revue",
   entities: [User],
+  ssl: IS_PROD,
   logging: !IS_PROD,
   migrations: ["build/migration/*.js"],
 });
