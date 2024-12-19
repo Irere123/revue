@@ -5,7 +5,7 @@ import session from "express-session";
 import { RedisStore } from "connect-redis";
 import { Router, Request, json } from "express";
 
-import { IS_PROD, WEB_URL } from "../lib/constants";
+import { COOKIE_NAME, IS_PROD, WEB_URL } from "../lib/constants";
 import { redisClient } from "../redis";
 
 const middlewares = Router();
@@ -32,7 +32,7 @@ if (!process.env.SESSION_SECRET && !process.env.TEST_DB) {
 
 middlewares.use(
   session({
-    name: "qid",
+    name: COOKIE_NAME,
     secret: process.env.SESSION_SECRET!,
     saveUninitialized: false, // recommended: only save session when data exists
     resave: false, // required: force lightweight session keep alive (touch)

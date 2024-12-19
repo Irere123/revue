@@ -10,9 +10,10 @@ import { buildSchema } from "type-graphql";
 
 import { init as initPassport } from "./authentication";
 import { RecipeResolver } from "./graphql";
-import { IS_PROD } from "./lib/constants";
+import { COOKIE_NAME, IS_PROD } from "./lib/constants";
 import { authRouter } from "./routes/auth";
 import { AppDataSource } from "./data-source";
+import { GQLContext } from "./types/context";
 
 const PORT = process.env.PORT || 4000;
 
@@ -35,6 +36,19 @@ async function main() {
     app.set("trust proxy", 1); // trust first proxy
   }
 
+  app.use((req, _, next) => {
+    const authorization = req.headers.authorization;
+
+    if (authorization) {
+      try {
+        const qid = authorization.split(" ")[1];
+        req.headers.cookie = `${COOKIE_NAME}=${qid}`;
+      } catch {}
+    }
+
+    return next();
+  });
+
   const schema = await buildSchema({
     resolvers: [RecipeResolver],
   });
@@ -51,7 +65,11 @@ async function main() {
     "/graphql",
     cors<cors.CorsRequest>(),
     express.json(),
-    expressMiddleware(server) as any
+    expressMiddleware(server, {
+      context: async ({ req, res }) => {
+        return { res, req };
+      },
+    }) as any
   );
 
   app.use("/auth", authRouter);

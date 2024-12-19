@@ -46,7 +46,7 @@ const init = () => {
       async (
         _req: any,
         accessToken: any,
-        _refreshToken: any,
+        refreshToken: any,
         userProfile: any,
         done: any
       ) => {
@@ -67,8 +67,7 @@ const init = () => {
           });
         }
 
-        console.log(user);
-        done(null, user);
+        done(null, { user, accessToken, refreshToken });
       }
     )
   );

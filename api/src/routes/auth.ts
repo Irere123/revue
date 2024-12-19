@@ -11,9 +11,10 @@ authRouter.get(
   "/github/callback",
   passport.authenticate("github", { session: false }),
   (req: any, res) => {
-    if (req.user.user && req.session) {
+    if (req.user.user.id && req.session) {
       req.session.userId = req.user.user.id;
-      req.session.githubAccessToken = req.user.githubAccessToken;
+      req.session.accessToken = req.user.accessToken;
+      req.session.refreshToken = req.user.refreshToken;
     }
     res.redirect(WEB_URL);
   }
