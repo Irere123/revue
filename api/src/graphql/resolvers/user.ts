@@ -1,4 +1,11 @@
-import { Ctx, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  Mutation,
+  Query,
+  Resolver,
+  UseMiddleware,
+} from "type-graphql";
 
 import { User } from "../../entity/User";
 import { GQLContext } from "../../types/context";
@@ -10,7 +17,7 @@ import { COOKIE_NAME } from "../../lib/constants";
 export class RecipeResolver {
   @Query(() => [User])
   users() {
-    return [];
+    return AppDataSource.getRepository(User).find();
   }
 
   @Mutation(() => Boolean)
@@ -39,6 +46,15 @@ export class RecipeResolver {
 
     return await AppDataSource.getRepository(User).findOne({
       where: { id: userId },
+    });
+  }
+
+  @Query(() => User, { nullable: true })
+  async getUserByUsername(
+    @Arg("username", { nullable: false }) username: string
+  ) {
+    return await AppDataSource.getRepository(User).findOne({
+      where: { username },
     });
   }
 }

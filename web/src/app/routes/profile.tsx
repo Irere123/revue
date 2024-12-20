@@ -1,5 +1,5 @@
 import { Home, MoreHorizontal } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 import { Github } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -10,25 +10,60 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { gql, useQuery } from "@apollo/client";
+
+const getUserProfileQuery = gql`
+  query GetUserByUsername($username: String!) {
+    getUserByUsername(username: $username) {
+      id
+      displayName
+      username
+      email
+      avatarUrl
+      bio
+    }
+  }
+`;
 
 export default function ProfilePage() {
+  const { username } = useParams();
+  const navigate = useNavigate();
+  const { data, loading, error } = useQuery(getUserProfileQuery, {
+    variables: { username },
+  });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!data.getUserByUsername) {
+    navigate("/dash");
+    return null;
+  }
+
+  const profile = data.getUserByUsername;
+
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <Card className="w-full h-52">
         <CardHeader className="flex justify-between flex-row">
           <div>
-            <h1 className="text-2xl font-bold">Profile</h1>
-            <p>@profile.username</p>
+            <h1 className="text-2xl font-bold">{profile.displayName}</h1>
+            <p>@{profile.username}</p>
           </div>
           <div>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="usernmae" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={profile.avatarUrl} alt={profile.username} />
+              <AvatarFallback>{profile.displayName.charAt(0)}</AvatarFallback>
             </Avatar>
           </div>
         </CardHeader>
         <CardContent>
-          <p>Hello world</p>
+          <p>{profile.bio}</p>
         </CardContent>
         <CardFooter className="flex justify-between items-center flex-row text-sm">
           <div className="flex gap-4">

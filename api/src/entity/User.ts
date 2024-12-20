@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  BaseEntity,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
+import { Profile } from "./Profile";
 
 @ObjectType()
 @Entity({ name: "users" })
@@ -34,12 +36,20 @@ export class User {
   githubId: string;
 
   @Field(() => String, { nullable: true })
+  @Column({ type: "text", nullable: true })
+  githubProfileUrl: string;
+
+  @Field(() => String, { nullable: true })
   @Column({ type: "text" })
   githubAccessToken: string;
 
   @Field(() => String, { nullable: true })
   @Column({ unique: true, nullable: true })
   email?: string;
+
+  @OneToOne(() => Profile)
+  @JoinColumn()
+  profile: Profile;
 
   @Field()
   @CreateDateColumn()
