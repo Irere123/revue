@@ -21,6 +21,7 @@ const ME_QUERY = gql`
 interface Options {
   LoadingComponent?: () => React.ReactNode;
   redirectUrl?: string;
+  shouldReredictIfAuth?: boolean;
   requireAuth?: boolean;
 }
 
@@ -29,11 +30,12 @@ const withAuth = (WrappedComponent: React.FC, options: Options = {}) => {
     LoadingComponent = () => <div>loading...</div>,
     redirectUrl = "/",
     requireAuth = true,
+    shouldReredictIfAuth = false,
   } = options;
 
   const WithAuthComponent = (props: any) => {
     const { data, loading, error } = useQuery(ME_QUERY, {
-      fetchPolicy: "network-only",
+      fetchPolicy: "cache-and-network",
     });
     const navigate = useNavigate();
 
@@ -48,6 +50,10 @@ const withAuth = (WrappedComponent: React.FC, options: Options = {}) => {
         // Redirect to login page if authentication is required
         return navigate(redirectUrl);
       }
+    }
+
+    if (shouldReredictIfAuth && data?.me) {
+      return navigate("/dash");
     }
 
     return (

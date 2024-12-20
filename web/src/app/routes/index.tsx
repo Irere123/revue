@@ -34,5 +34,8 @@ function HomePage() {
   );
 }
 
-const AuthenticatedHomePage = withAuth(HomePage, { requireAuth: false });
+const AuthenticatedHomePage = withAuth(HomePage, {
+  requireAuth: false,
+  shouldReredictIfAuth: true,
+});
 export default AuthenticatedHomePage;
