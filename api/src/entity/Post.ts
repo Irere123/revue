@@ -21,7 +21,7 @@ export class Post {
   id: string;
 
   @Field(() => [String])
-  topics: string;
+  topics: string[];
 
   @Field()
   @Column({ type: "text" })
@@ -34,6 +34,10 @@ export class Post {
   @Field()
   @Column({ type: "text" })
   repo: string;
+
+  @Field()
+  @Column({ type: "text" })
+  commitId: string;
 
   @Field()
   @Column({ type: "text" })

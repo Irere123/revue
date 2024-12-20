@@ -14,7 +14,7 @@ import { isAuthenticated } from "../../middlewares/isAuthenticated";
 import { COOKIE_NAME } from "../../lib/constants";
 
 @Resolver(User)
-export class RecipeResolver {
+export class UserResolver {
   @Query(() => [User])
   users() {
     return AppDataSource.getRepository(User).find();

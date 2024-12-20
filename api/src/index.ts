@@ -10,7 +10,7 @@ import { buildSchema } from "type-graphql";
 
 import { middlewares } from "./middlewares";
 import { init as initPassport } from "./authentication";
-import { RecipeResolver } from "./graphql";
+import { PostResolver, UserResolver } from "./graphql";
 import { COOKIE_NAME, IS_PROD, WEB_URL } from "./lib/constants";
 import { authRouter } from "./routes/auth";
 import { AppDataSource } from "./data-source";
@@ -51,7 +51,7 @@ async function main() {
   });
 
   const schema = await buildSchema({
-    resolvers: [RecipeResolver],
+    resolvers: [UserResolver, PostResolver],
   });
 
   const httpServer = http.createServer(app);
