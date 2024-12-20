@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Bell, Home, Search } from "lucide-react";
 import { Link } from "react-router";
 
@@ -7,9 +7,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { NavDropDown } from "./nav-dropdown";
 import { Group } from "./icons";
 import { CommandPalette } from "./command-palette";
+import { AuthContext } from "@/contexts/auth-context";
 
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
+  const { user } = useContext(AuthContext);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -26,10 +28,10 @@ export function Navbar() {
   return (
     <nav className="mx-auto min-h-12 w-full max-w-screen-md flex items-center justify-between py-8 sticky">
       <div className="text-2xl font-bold hidden md:flex items-center md:w-96">
-        <Link to={`/u/${"shadcn"}`}>
+        <Link to={`/u/${user?.username}`}>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={user?.avatarUrl} alt={user?.displayName} />
+            <AvatarFallback>{user?.displayName.charAt(0)}</AvatarFallback>
           </Avatar>
         </Link>
       </div>

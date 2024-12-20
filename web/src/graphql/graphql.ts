@@ -31,6 +31,7 @@ export type Query = {
 
 export type User = {
   __typename?: 'User';
+  avatarUrl: Scalars['String']['output'];
   bio?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTimeISO']['output'];
   displayName: Scalars['String']['output'];
@@ -49,7 +50,7 @@ export type LogoutQueryMutation = { __typename?: 'Mutation', logout: boolean };
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, bio?: string | null, displayName: string, email?: string | null, username: string, updatedAt: any, createdAt: any } | null };
+export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, bio?: string | null, displayName: string, avatarUrl: string, email?: string | null, username: string, updatedAt: any, createdAt: any } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -77,6 +78,7 @@ export const MeQueryDocument = new TypedDocumentString(`
     id
     bio
     displayName
+    avatarUrl
     email
     username
     updatedAt

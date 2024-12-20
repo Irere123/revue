@@ -18,6 +18,7 @@ type Query {
 }
 
 type User {
+  avatarUrl: String!
   bio: String
   createdAt: DateTimeISO!
   displayName: String!

@@ -16,7 +16,7 @@ import * as types from './graphql';
  */
 const documents = {
     "\n  mutation LogoutQuery {\n    logout\n  }\n": types.LogoutQueryDocument,
-    "\n  query MeQuery {\n    me {\n      id\n      bio\n      displayName\n      email\n      username\n      updatedAt\n      createdAt\n    }\n  }\n": types.MeQueryDocument,
+    "\n  query MeQuery {\n    me {\n      id\n      bio\n      displayName\n      avatarUrl\n      email\n      username\n      updatedAt\n      createdAt\n    }\n  }\n": types.MeQueryDocument,
 };
 
 /**
@@ -26,7 +26,7 @@ export function graphql(source: "\n  mutation LogoutQuery {\n    logout\n  }\n")
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query MeQuery {\n    me {\n      id\n      bio\n      displayName\n      email\n      username\n      updatedAt\n      createdAt\n    }\n  }\n"): typeof import('./graphql').MeQueryDocument;
+export function graphql(source: "\n  query MeQuery {\n    me {\n      id\n      bio\n      displayName\n      avatarUrl\n      email\n      username\n      updatedAt\n      createdAt\n    }\n  }\n"): typeof import('./graphql').MeQueryDocument;
 
 
 export function graphql(source: string) {

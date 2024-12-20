@@ -9,7 +9,7 @@ import {
 
 @ObjectType()
 @Entity({ name: "users" })
-export class User extends BaseEntity {
+export class User {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id!: number;
@@ -26,6 +26,7 @@ export class User extends BaseEntity {
   @Column({ type: "text", nullable: true })
   bio: string | null;
 
+  @Field(() => String)
   @Column({ type: "text" })
   avatarUrl: string;
 

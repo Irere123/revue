@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 import { useQuery, gql } from "@apollo/client";
-// import { graphql } from "@/graphql";
 
 const ME_QUERY = gql`
   query MeQuery {
@@ -25,7 +24,7 @@ interface Options {
   requireAuth?: boolean;
 }
 
-const withAuth = (WrappedComponent: React.FC, options: Options = {}) => {
+const withAuth = (WrappedComponent: React.FC<any>, options: Options = {}) => {
   const {
     LoadingComponent = () => <div>loading...</div>,
     redirectUrl = "/",
@@ -33,7 +32,7 @@ const withAuth = (WrappedComponent: React.FC, options: Options = {}) => {
     shouldReredictIfAuth = false,
   } = options;
 
-  const WithAuthComponent = (props: any) => {
+  const WithAuthComponent: React.FC<any> = (props) => {
     const { data, loading, error } = useQuery(ME_QUERY, {
       fetchPolicy: "cache-and-network",
     });
@@ -48,12 +47,14 @@ const withAuth = (WrappedComponent: React.FC, options: Options = {}) => {
     if (error || !data?.me) {
       if (requireAuth && typeof window !== "undefined") {
         // Redirect to login page if authentication is required
-        return navigate(redirectUrl);
+        navigate(redirectUrl);
+        return null;
       }
     }
 
     if (shouldReredictIfAuth && data?.me) {
-      return navigate("/dash");
+      navigate("/dash");
+      return null;
     }
 
     return (
