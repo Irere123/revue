@@ -39,12 +39,12 @@ export class Comment {
   @Column()
   creatorId: number;
 
-  @Field()
-  async creator() {
-    return await AppDataSource.getRepository(User).findOne({
-      where: { id: this.creatorId },
-    });
-  }
+  //   @Field()
+  //   async creator() {
+  //     return await AppDataSource.getRepository(User).findOne({
+  //       where: { id: this.creatorId },
+  //     });
+  //   }
 
   @Field()
   @CreateDateColumn({ type: "time with time zone" })

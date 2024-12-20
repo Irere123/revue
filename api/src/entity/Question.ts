@@ -1,7 +1,8 @@
-import { Field, ID, Int } from "type-graphql";
+import { Field, ID, Int, ObjectType } from "type-graphql";
 import {
   Column,
   CreateDateColumn,
+  Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -14,6 +15,8 @@ import { AppDataSource } from "../data-source";
 import { Post } from "./Post";
 import { Comment } from "./Comment";
 
+@Entity()
+@ObjectType()
 export class Question {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
@@ -53,12 +56,12 @@ export class Question {
   @ManyToOne(() => User, (user) => user.Questions, { onDelete: "CASCADE" })
   creatorConnection: Promise<User>;
 
-  @Field(() => User)
-  async creator() {
-    return await AppDataSource.getRepository(User).findOne({
-      where: { id: this.creatorId },
-    });
-  }
+  //   @Field(() => User)
+  //   async creator() {
+  //     return await AppDataSource.getRepository(User).findOne({
+  //       where: { id: this.creatorId },
+  //     });
+  //   }
 
   @Field(() => Post)
   @ManyToOne(() => Post, (crp) => crp.numQuestions, { onDelete: "CASCADE" })

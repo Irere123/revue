@@ -43,12 +43,12 @@ export class Post {
   @Column()
   creatorId: number;
 
-  @Field(() => User)
-  async creator() {
-    return await AppDataSource.getRepository(User).findOne({
-      where: { id: this.creatorId },
-    });
-  }
+  //   @Field(() => User)
+  //   async creator() {
+  //     return await AppDataSource.getRepository(User).findOne({
+  //       where: { id: this.creatorId },
+  //     });
+  //   }
 
   @OneToMany(() => Question, (crq) => crq.post)
   questions: Promise<Question[]>;
