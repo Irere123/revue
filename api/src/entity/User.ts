@@ -6,8 +6,12 @@ import {
   CreateDateColumn,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { Profile } from "./Profile";
+import { Post } from "./Post";
+import { Question } from "./Question";
+import { Comment } from "./Comment";
 
 @ObjectType()
 @Entity({ name: "users" })
@@ -43,6 +47,9 @@ export class User {
   @Column({ type: "text" })
   githubAccessToken: string;
 
+  @Field(() => Boolean)
+  hasUnreadNotification: Promise<boolean>;
+
   @Field(() => String, { nullable: true })
   @Column({ unique: true, nullable: true })
   email?: string;
@@ -50,6 +57,15 @@ export class User {
   @OneToOne(() => Profile)
   @JoinColumn()
   profile: Profile;
+
+  @OneToMany(() => Question, (crq) => crq.creatorConnection)
+  Questions: Promise<Question[]>;
+
+  @OneToMany(() => Comment, (qr) => qr.creatorConnection)
+  comments: Promise<Comment[]>;
+
+  @OneToMany(() => Post, (crp) => crp.creatorConnection)
+  Posts: Promise<Post[]>;
 
   @Field()
   @CreateDateColumn()
