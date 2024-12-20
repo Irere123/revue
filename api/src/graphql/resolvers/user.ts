@@ -1,14 +1,32 @@
-import { Ctx, Query, Resolver } from "type-graphql";
+import { Ctx, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 
 import { User } from "../../entity/User";
 import { GQLContext } from "../../types/context";
 import { AppDataSource } from "../../data-source";
+import { isAuthenticated } from "../../middlewares/isAuthenticated";
+import { COOKIE_NAME } from "../../lib/constants";
 
 @Resolver(User)
 export class RecipeResolver {
   @Query(() => [User])
   users() {
     return [];
+  }
+
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuthenticated)
+  async logout(@Ctx() ctx: GQLContext) {
+    return new Promise((res, rej) => {
+      ctx.req.session?.destroy((err) => {
+        if (err) {
+          console.error(err);
+          return rej(false);
+        }
+
+        ctx.res.clearCookie(COOKIE_NAME);
+        return res(true);
+      });
+    });
   }
 
   @Query(() => User, { nullable: true })

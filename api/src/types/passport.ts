@@ -8,11 +8,3 @@ export interface GithubProfile extends Profile {
     [key: string]: string;
   };
 }
-
-type Req = Request & { session: { lastRequest: string; user: User } };
-
-export type GQLContext = {
-  user: User;
-  res: Response;
-  req: Req;
-};
