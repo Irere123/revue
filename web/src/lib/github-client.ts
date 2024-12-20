@@ -9,7 +9,7 @@ export const createGithubClient = (accessToken: string) => {
   const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
-      authorization: `Bearer ${accessToken}`,
+      authorization: `bearer ${accessToken}`,
     },
   }));
 

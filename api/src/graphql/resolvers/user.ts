@@ -1,6 +1,7 @@
 import {
   Arg,
   Ctx,
+  FieldResolver,
   Mutation,
   Query,
   Resolver,
@@ -34,6 +35,13 @@ export class UserResolver {
         return res(true);
       });
     });
+  }
+
+  @FieldResolver()
+  githubAccessToken(@Ctx() { req }: GQLContext) {
+    return req.session && req.session.accessToken
+      ? req.session.accessToken
+      : "";
   }
 
   @Query(() => User, { nullable: true })

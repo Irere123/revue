@@ -10,6 +10,7 @@ const ME_QUERY = gql(`
       id
       bio
       displayName
+      githubAccessToken
       email
       username
       updatedAt

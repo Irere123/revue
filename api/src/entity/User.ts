@@ -44,7 +44,6 @@ export class User {
   githubProfileUrl: string;
 
   @Field(() => String, { nullable: true })
-  @Column({ type: "text" })
   githubAccessToken: string;
 
   @Field(() => Boolean)

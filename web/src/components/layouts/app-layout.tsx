@@ -8,6 +8,7 @@ import { GithubContextProvider } from "@/contexts/github-provider";
 
 const AppLayout = withAuth(
   ({ user }: { user?: User | null }) => {
+    console.log(user);
     return (
       <AuthContext.Provider value={{ user, isAuthenticated: !!user }}>
         <GithubContextProvider accessToken={user?.githubAccessToken as string}>

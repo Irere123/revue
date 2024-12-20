@@ -7,14 +7,12 @@ export const createUser = async ({
   avatarUrl,
   bio,
   displayName,
-  githubAccessToken,
 }: {
   username: string;
   githubId: string;
   avatarUrl: string;
   bio: string;
   displayName: string;
-  githubAccessToken: string;
 }): Promise<User | null> => {
   let user: User | null = null;
   let times = 0;
@@ -27,7 +25,6 @@ export const createUser = async ({
         avatarUrl,
         bio,
         displayName,
-        githubAccessToken,
       });
       break;
     } catch (err) {

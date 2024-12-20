@@ -10,7 +10,7 @@ export const repoInfoFragment = gql`
     defaultBranchRef {
       name
       target {
-        _typename
+        __typename
         oid
       }
     }

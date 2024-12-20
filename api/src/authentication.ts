@@ -62,7 +62,6 @@ const init = () => {
             bio: profile._json.bio,
             githubId: profile.id,
             displayName: profile.displayName,
-            githubAccessToken: accessToken,
             username: profile.username as string,
           });
         }
