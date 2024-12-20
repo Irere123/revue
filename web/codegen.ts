@@ -9,6 +9,8 @@ const config: CodegenConfig = {
       preset: "client",
       presetConfig: {
         gqlTagName: "gql",
+        withHooks: true,
+        withComponent: true,
       },
     },
     "./schema.graphql": {

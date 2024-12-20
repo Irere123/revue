@@ -8,6 +8,7 @@ import OnBoardingPage from "./app/routes/onboarding";
 import DashboardPage from "./app/routes/dash";
 import FocusLayout from "./components/layouts/focus-layout";
 import ProfilePage from "./app/routes/profile";
+import SubmitPage from "./app/routes/submit";
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
           </Route>
           <Route element={<AppLayout />}>
             <Route path="dash" element={<DashboardPage />} />
+            <Route path="submit" element={<SubmitPage />} />
           </Route>
           <Route element={<FocusLayout />}>
             <Route path="u/:username" element={<ProfilePage />} />

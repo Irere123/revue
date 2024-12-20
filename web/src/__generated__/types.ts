@@ -116,7 +116,7 @@ export type LogoutQueryMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type LogoutQueryMutation = { __typename?: 'Mutation', logout: boolean };
 
-export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, bio?: string | null, displayName: string, email?: string | null, username: string, updatedAt: any, createdAt: any } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, bio?: string | null, displayName: string, email?: string | null, username: string, updatedAt: any, createdAt: any } | null };

@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { useQuery } from "@apollo/client";
 
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@/__generated__/gql";
 
-const ME_QUERY = gql`
-  query MeQuery {
+const ME_QUERY = gql(`
+  query Me {
     me {
       id
       bio
@@ -15,7 +16,7 @@ const ME_QUERY = gql`
       createdAt
     }
   }
-`;
+`);
 
 interface Options {
   LoadingComponent?: () => React.ReactNode;
