@@ -188,12 +188,21 @@ importers:
       '@graphql-codegen/cli':
         specifier: ^5.0.3
         version: 5.0.3(@parcel/watcher@2.5.0)(@types/node@22.10.2)(graphql@16.10.0)(typescript@5.6.3)
+      '@graphql-codegen/client-preset':
+        specifier: ^4.5.1
+        version: 4.5.1(graphql@16.10.0)
       '@graphql-codegen/client-preset-swc-plugin':
         specifier: ^0.2.0
         version: 0.2.0
       '@graphql-codegen/schema-ast':
         specifier: ^4.1.0
         version: 4.1.0(graphql@16.10.0)
+      '@graphql-codegen/typescript':
+        specifier: ^4.1.2
+        version: 4.1.2(graphql@16.10.0)
+      '@graphql-codegen/typescript-operations':
+        specifier: ^4.4.0
+        version: 4.4.0(graphql@16.10.0)
       '@graphql-typed-document-node/core':
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.10.0)

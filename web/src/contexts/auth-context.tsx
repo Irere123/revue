@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { User } from "@/graphql/graphql";
+import { User } from "@/__generated__/types";
 
 interface AuthContextType {
   user: User | null | undefined;

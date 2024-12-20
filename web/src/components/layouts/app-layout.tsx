@@ -1,8 +1,9 @@
 import { Outlet } from "react-router";
-import { Navbar } from "../navbar";
+
 import withAuth from "@/lib/withAuth";
-import { User } from "@/graphql/graphql";
+import { Navbar } from "../navbar";
 import { AuthContext } from "@/contexts/auth-context";
+import { User } from "@/__generated__/types";
 
 const AppLayout = withAuth(
   ({ user }: { user?: User | null }) => {
